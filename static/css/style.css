@@ -1,0 +1,45 @@
+body{
+
+    background:#F8FAFC;
+
+    font-family:'Inter',sans-serif;
+
+    color:#1F2937;
+
+}
+
+h1,h2,h3,h4,h5{
+
+    font-family:'Poppins',sans-serif;
+
+}
+
+.navbar{
+
+    border-bottom:1px solid #e5e7eb;
+
+}
+
+.btn-primary{
+
+    background:#2563EB;
+
+    border:none;
+
+    padding:12px 28px;
+
+    border-radius:12px;
+
+}
+
+.btn-primary:hover{
+
+    background:#1D4ED8;
+
+}
+
+footer{
+
+    background:white;
+
+}
