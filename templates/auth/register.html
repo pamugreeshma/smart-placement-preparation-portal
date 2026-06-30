@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+
+<div class="auth-container">
+
+    <div class="auth-left">
+
+        <h1>CareerForge</h1>
+
+        <h2>Build Your Dream Career</h2>
+
+        <p>
+            Prepare for interviews, build resumes,
+            follow roadmaps and land your dream job.
+        </p>
+
+        <ul>
+            <li>✔ AI Interview Preparation</li>
+            <li>✔ Resume Builder</li>
+            <li>✔ Placement Roadmaps</li>
+            <li>✔ Job Tracker</li>
+        </ul>
+
+    </div>
+
+    <div class="auth-right">
+
+        <div class="auth-card">
+
+            <h2>Create Account</h2>
+
+            <form method="POST">
+
+                <input
+                    type="text"
+                    class="form-control"
+                    name="full_name"
+                    placeholder="Full Name"
+                    required
+                >
+
+                <input
+                    type="email"
+                    class="form-control"
+                    name="email"
+                    placeholder="Email"
+                    required
+                >
+
+                <input
+                    type="password"
+                    class="form-control"
+                    name="password"
+                    placeholder="Password"
+                    required
+                >
+
+                <button type="submit" class="btn btn-primary w-100">
+                    Create Account
+                </button>
+
+            </form>
+
+            <p>
+
+                Already have an account?
+
+                <a href="{{ url_for('auth.login') }}">
+                    Login
+                </a>
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

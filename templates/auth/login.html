@@ -1,16 +1,81 @@
 {% extends "base.html" %}
 
-{% block title %}
-Login
-{% endblock %}
+{% block title %}Login{% endblock %}
 
 {% block content %}
 
-<div class="container mt-5">
+<div class="auth-container">
 
-    <h1>Login Page</h1>
+    <div class="auth-left">
 
-    <p>If you can see this, the authentication blueprint is working!</p>
+        <h1>CareerForge</h1>
+
+        <h2>Welcome Back</h2>
+
+        <p>
+            Continue your placement preparation journey.
+        </p>
+
+        <ul>
+
+            <li>✔ Track Progress</li>
+
+            <li>✔ Resume Builder</li>
+
+            <li>✔ Interview Practice</li>
+
+            <li>✔ AI Guidance</li>
+
+        </ul>
+
+    </div>
+
+    <div class="auth-right">
+
+        <div class="auth-card">
+
+            <h2>Login</h2>
+
+            <form method="POST">
+
+                <input
+                    type="email"
+                    class="form-control"
+                    name="email"
+                    placeholder="Email"
+                    required
+                >
+
+                <input
+                    type="password"
+                    class="form-control"
+                    name="password"
+                    placeholder="Password"
+                    required
+                >
+
+                <button type="submit" class="btn btn-primary w-100">
+
+                    Login
+
+                </button>
+                
+
+            </form>
+
+            <p>
+
+                New here?
+
+                <a href="{{ url_for('auth.register') }}">
+                    Create Account
+                </a>
+
+            </p>
+
+        </div>
+
+    </div>
 
 </div>
 
