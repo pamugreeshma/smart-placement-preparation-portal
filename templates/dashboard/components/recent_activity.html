@@ -1,0 +1,91 @@
+<div class="card border-0 shadow-sm mt-4">
+
+    <div class="card-body p-4">
+
+        <div class="mb-4">
+
+            <span class="text-muted small">
+                ACTIVITY
+            </span>
+
+            <h4 class="mb-0 mt-1">
+                ⚡ Recent Achievements
+            </h4>
+
+        </div>
+
+
+        {% if recent_completed %}
+
+            <div class="recent-activity-list">
+
+                {% for record in recent_completed %}
+
+                    <div class="recent-activity-item">
+
+                        <div class="activity-check">
+
+                            <i class="bi bi-check-lg"></i>
+
+                        </div>
+
+
+                        <div class="flex-grow-1">
+
+                            <strong>
+
+                                {{ record.topic.title }}
+
+                            </strong>
+
+                            <div class="small text-muted mt-1">
+
+                                Completed in
+
+                                {{ record.topic.roadmap.title }}
+
+                            </div>
+
+                        </div>
+
+
+                        {% if record.completed_at %}
+
+                            <small class="text-muted">
+
+                                {{ record.completed_at.strftime(
+                                    "%d %b"
+                                ) }}
+
+                            </small>
+
+                        {% endif %}
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="text-center py-4">
+
+                <div class="fs-2 mb-2">
+                    🎯
+                </div>
+
+                <p class="text-muted mb-0">
+
+                    Complete roadmap topics and your
+                    achievements will appear here.
+
+                </p>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>

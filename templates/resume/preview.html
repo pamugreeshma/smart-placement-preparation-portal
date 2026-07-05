@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}Resume Preview{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="d-flex justify-content-between mb-4">
+
+        <h2>Resume Preview</h2>
+
+        
+        <div class="d-flex gap-3">
+
+           <a href="{{ url_for('resume.builder') }}"
+             class="btn btn-outline-primary">
+
+              Edit Resume
+
+             </a>
+
+            <a href="{{ url_for('resume.download') }}"
+                 class="btn btn-success">
+
+                   Download PDF
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="card shadow-lg border-0">
+
+        <div class="card-body p-5">
+
+            <h1>{{ current_user.full_name }}</h1>
+
+            <hr>
+
+            <p><strong>Email :</strong> {{ current_user.email }}</p>
+
+            <p><strong>Phone :</strong> {{ resume.phone }}</p>
+
+            <p><strong>Address :</strong> {{ resume.address }}</p>
+
+            <p><strong>LinkedIn :</strong> {{ resume.linkedin }}</p>
+
+            <p><strong>GitHub :</strong> {{ resume.github }}</p>
+
+            <br>
+
+            <h4>Career Objective</h4>
+
+            <p>{{ resume.objective }}</p>
+
+            <h4>Education</h4>
+
+            <p>{{ resume.education }}</p>
+
+            <h4>Experience</h4>
+
+            <p>{{ resume.experience }}</p>
+
+            <h4>Projects</h4>
+
+            <p>{{ resume.projects }}</p>
+
+            <h4>Skills</h4>
+
+            <p>{{ resume.skills }}</p>
+
+            <h4>Certifications</h4>
+
+            <p>{{ resume.certifications }}</p>
+
+            <h4>Achievements</h4>
+
+            <p>{{ resume.achievements }}</p>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

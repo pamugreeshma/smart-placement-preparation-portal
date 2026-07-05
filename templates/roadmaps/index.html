@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block title %}
+Career Roadmaps | CareerForge
+{% endblock %}
+
+
+{% block content %}
+
+<section class="roadmaps-page">
+
+    <div class="container py-5">
+
+        <div class="roadmap-page-header">
+
+            <div>
+
+                <span class="roadmap-eyebrow">
+                    CAREERFORGE LEARNING PATHS
+                </span>
+
+                <h1>
+                    Choose Your Career Roadmap
+                </h1>
+
+                <p>
+                    Follow structured learning paths,
+                    complete real milestones and track
+                    your progress automatically.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        {% if roadmap_data %}
+
+            <div class="roadmap-grid">
+
+                {% for item in roadmap_data %}
+
+                    <article class="roadmap-card">
+
+                        <div class="roadmap-card-top">
+
+                            <div class="roadmap-icon">
+
+                                <i class="bi {{ item.roadmap.icon }}"></i>
+
+                            </div>
+
+                            <span class="roadmap-progress-pill">
+                                {{ item.progress }}%
+                            </span>
+
+                        </div>
+
+
+                        <h3>
+                            {{ item.roadmap.title }}
+                        </h3>
+
+
+                        <p>
+                            {{ item.roadmap.description }}
+                        </p>
+
+
+                        <div class="roadmap-meta">
+
+                            <span>
+                                <i class="bi bi-list-check"></i>
+
+                                {{ item.completed_topics }}
+                                /
+                                {{ item.total_topics }}
+                                topics
+                            </span>
+
+                        </div>
+
+
+                        <div class="roadmap-progress-track">
+
+                            <div
+                                class="roadmap-progress-fill"
+                                style="width: {{ item.progress }}%"
+                            >
+                            </div>
+
+                        </div>
+
+
+                        <a
+                            href="{{ url_for(
+                                'roadmap.detail',
+                                slug=item.roadmap.slug
+                            ) }}"
+                            class="btn btn-primary w-100 mt-4"
+                        >
+                            {% if item.progress > 0 %}
+                                Continue Roadmap
+                            {% else %}
+                                Start Roadmap
+                            {% endif %}
+                        </a>
+
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="roadmap-empty-state">
+
+                <i class="bi bi-signpost-split"></i>
+
+                <h3>
+                    Roadmaps are being prepared
+                </h3>
+
+                <p>
+                    Seed the CareerForge roadmap database
+                    to begin.
+                </p>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

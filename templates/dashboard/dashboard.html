@@ -1,17 +1,30 @@
 {% extends "base.html" %}
 
-{% block title %}
-Dashboard
-{% endblock %}
+{% block title %}Dashboard{% endblock %}
 
 {% block content %}
 
-<div class="container mt-5">
+<div class="container py-5">
 
-    <h1>Welcome to CareerForge Dashboard 🚀</h1>
+    {% include "dashboard/components/welcome_card.html" %}
 
-    <p>You are successfully logged in.</p>
+    {% include "dashboard/components/stats_cards.html" %}
 
+    {% include "dashboard/components/recent_applications.html" %}
+    
+    {% include "dashboard/components/progress.html" %}
+
+    {% include "dashboard/components/continue_learning.html" %}
+
+    {% include "dashboard/components/recent_activity.html" %}
+
+    {% include "dashboard/components/quick_actions.html" %}
+
+    {% include "dashboard/components/tasks.html" %}
+
+    {% include "dashboard/components/resume_insights.html" %}
+
+    {% include "dashboard/components/analysis_history.html" %}
 </div>
 
 {% endblock %}

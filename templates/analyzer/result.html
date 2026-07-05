@@ -1,0 +1,291 @@
+{% extends "base.html" %}
+
+{% block title %}
+Analysis Result | CareerForge
+{% endblock %}
+
+
+{% block content %}
+
+<section class="result-page">
+
+    <div class="container">
+
+        <div class="result-header">
+
+            <div>
+
+                <span class="analyzer-badge">
+                    Analysis Complete
+                </span>
+
+                <h1>
+                    Resume Intelligence Report
+                </h1>
+
+                <p>
+                    {{ analysis.file_name }}
+                </p>
+
+            </div>
+
+            <a
+                href="{{ url_for('analyzer.upload_resume') }}"
+                class="btn btn-outline-primary"
+            >
+                Analyze Another
+            </a>
+
+        </div>
+
+
+        <div class="score-card">
+
+            <div
+                class="score-circle"
+                style="--score: {{ result.ats_score }}"
+            >
+
+                <div>
+
+                    <strong>
+                        {{ result.ats_score }}
+                    </strong>
+
+                    <span>
+                        / 100
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div>
+
+                <h2>
+                    ATS-Style Score
+                </h2>
+
+                {% if result.ats_score >= 80 %}
+
+                    <p>
+                        Strong resume foundation. Focus on
+                        job-specific keyword tailoring.
+                    </p>
+
+                {% elif result.ats_score >= 60 %}
+
+                    <p>
+                        Good foundation with clear opportunities
+                        for stronger impact and ATS alignment.
+                    </p>
+
+                {% else %}
+
+                    <p>
+                        Your resume needs stronger structure,
+                        keywords and measurable achievements.
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <div class="analysis-grid">
+
+            <div class="analysis-card">
+
+                <h3>
+                    <i class="bi bi-check2-circle"></i>
+                    Contact & Profiles
+                </h3>
+
+                <div class="check-row">
+                    <span>Email</span>
+                    <strong>
+                        {{ "Found" if result.has_email else "Missing" }}
+                    </strong>
+                </div>
+
+                <div class="check-row">
+                    <span>Phone</span>
+                    <strong>
+                        {{ "Found" if result.has_phone else "Missing" }}
+                    </strong>
+                </div>
+
+                <div class="check-row">
+                    <span>LinkedIn</span>
+                    <strong>
+                        {{ "Found" if result.has_linkedin else "Missing" }}
+                    </strong>
+                </div>
+
+                <div class="check-row">
+                    <span>GitHub</span>
+                    <strong>
+                        {{ "Found" if result.has_github else "Missing" }}
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <div class="analysis-card">
+
+                <h3>
+                    <i class="bi bi-bar-chart"></i>
+                    Resume Signals
+                </h3>
+
+                <div class="check-row">
+                    <span>Word Count</span>
+                    <strong>
+                        {{ result.word_count }}
+                    </strong>
+                </div>
+
+                <div class="check-row">
+                    <span>Action Verbs</span>
+                    <strong>
+                        {{ result.action_verb_count }}
+                    </strong>
+                </div>
+
+                <div class="check-row">
+                    <span>Measurable Metrics</span>
+                    <strong>
+                        {{ result.metric_count }}
+                    </strong>
+                </div>
+
+                <div class="check-row">
+                    <span>Skills Found</span>
+                    <strong>
+                        {{ result.detected_skills|length }}
+                    </strong>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="analysis-card mt-4">
+
+            <h3>
+                <i class="bi bi-cpu"></i>
+                Detected Technical Skills
+            </h3>
+
+            <div class="skill-cloud">
+
+                {% for skill in result.detected_skills %}
+
+                    <span class="skill-tag found">
+                        {{ skill }}
+                    </span>
+
+                {% else %}
+
+                    <p class="text-muted">
+                        No major technical keywords detected.
+                    </p>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+
+        <div class="analysis-grid mt-4">
+
+            <div class="analysis-card">
+
+                <h3>
+                    Detected Sections
+                </h3>
+
+                <div class="skill-cloud">
+
+                    {% for section in result.detected_sections %}
+
+                        <span class="skill-tag found">
+                            {{ section }}
+                        </span>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+
+            <div class="analysis-card">
+
+                <h3>
+                    Missing Sections
+                </h3>
+
+                <div class="skill-cloud">
+
+                    {% for section in result.missing_sections %}
+
+                        <span class="skill-tag missing">
+                            {{ section }}
+                        </span>
+
+                    {% else %}
+
+                        <p>
+                            Excellent — all major sections detected.
+                        </p>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="analysis-card mt-4">
+
+            <h3>
+                <i class="bi bi-lightbulb"></i>
+                Priority Improvements
+            </h3>
+
+            <div class="suggestion-list">
+
+                {% for suggestion in result.suggestions %}
+
+                    <div class="suggestion-item">
+
+                        <span>
+                            {{ loop.index }}
+                        </span>
+
+                        <p>
+                            {{ suggestion }}
+                        </p>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

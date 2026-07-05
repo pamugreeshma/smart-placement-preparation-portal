@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+
+{% block title %}Resume Builder{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="card shadow border-0">
+
+        <div class="card-body">
+
+            <h2 class="mb-4">Resume Builder</h2>
+
+            <form method="POST">
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+
+                        <label>Phone</label>
+
+                        <input
+                            class="form-control"
+                            name="phone"
+                            value="{{ resume.phone if resume else '' }}"
+                        >
+
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+
+                        <label>Address</label>
+
+                        <input
+                            class="form-control"
+                            name="address"
+                            value="{{ resume.address if resume else '' }}"
+                        >
+
+                    </div>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label>LinkedIn</label>
+
+                    <input
+                        class="form-control"
+                        name="linkedin"
+                        value="{{ resume.linkedin if resume else '' }}"
+                    >
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label>GitHub</label>
+
+                    <input
+                        class="form-control"
+                        name="github"
+                        value="{{ resume.github if resume else '' }}"
+                    >
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label>Career Objective</label>
+
+                    <textarea
+                        rows="5"
+                        class="form-control"
+                        name="objective"
+                    >{{ resume.objective if resume else '' }}</textarea>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label>Education</label>
+
+                    <textarea
+                        rows="5"
+                        class="form-control"
+                        name="education"
+                    >{{ resume.education if resume else '' }}</textarea>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label>Experience</label>
+
+                    <textarea
+                        rows="5"
+                        class="form-control"
+                        name="experience"
+                    >{{ resume.experience if resume else '' }}</textarea>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label>Projects</label>
+
+                    <textarea
+                        rows="6"
+                        class="form-control"
+                        name="projects"
+                    >{{ resume.projects if resume else '' }}</textarea>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label>Skills</label>
+
+                    <textarea
+                        rows="4"
+                        class="form-control"
+                        name="skills"
+                    >{{ resume.skills if resume else '' }}</textarea>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label>Certifications</label>
+
+                    <textarea
+                        rows="4"
+                        class="form-control"
+                        name="certifications"
+                    >{{ resume.certifications if resume else '' }}</textarea>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label>Achievements</label>
+
+                    <textarea
+                        rows="4"
+                        class="form-control"
+                        name="achievements"
+                    >{{ resume.achievements if resume else '' }}</textarea>
+
+                </div>
+
+                
+                <div class="d-flex gap-3">
+
+                    <button class="btn btn-primary btn-lg">
+
+                        Save Resume
+
+                    </button>
+
+                    <a href="{{ url_for('resume.preview') }}"
+                       class="btn btn-success btn-lg">
+
+                        Preview Resume
+
+                     </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

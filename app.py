@@ -1,3 +1,9 @@
+from routes.analyzer import analyzer
+
+from routes.applications import applications
+
+from models.application import JobApplication
+
 from routes.main import main
 
 from routes.auth import auth
@@ -11,6 +17,17 @@ from config import Config
 from models import db
 
 from models.user import User
+
+from models.resume import Resume
+from models.roadmap import (
+    Roadmap,
+    RoadmapTopic,
+    UserTopicProgress
+)
+
+from routes.resume import resume
+
+from routes.roadmap import roadmap
 
 
 login_manager = LoginManager()
@@ -33,7 +50,10 @@ def create_app():
 
     app.register_blueprint(main)
     app.register_blueprint(auth)
-    
+    app.register_blueprint(resume)
+    app.register_blueprint(analyzer)
+    app.register_blueprint(roadmap)
+    app.register_blueprint(applications)
     return app
 
 

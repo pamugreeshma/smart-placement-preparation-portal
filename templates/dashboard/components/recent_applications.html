@@ -1,0 +1,110 @@
+<div class="card border-0 shadow-sm mt-4">
+
+    <div class="card-body p-4">
+
+        <div class="d-flex
+                    justify-content-between
+                    align-items-center
+                    mb-4">
+
+            <div>
+
+                <p class="text-primary
+                          fw-semibold
+                          small
+                          mb-1">
+                    PLACEMENT PIPELINE
+                </p>
+
+                <h4 class="fw-bold mb-0">
+                    Recent Applications
+                </h4>
+
+            </div>
+
+            <a
+                href="{{ url_for('applications.index') }}"
+                class="btn btn-outline-primary btn-sm"
+            >
+                View All
+            </a>
+
+        </div>
+
+
+        {% if applications %}
+
+            <div class="list-group list-group-flush">
+
+                {% for application in applications[:5] %}
+
+                    <div class="list-group-item
+                                px-0
+                                py-3">
+
+                        <div class="d-flex
+                                    justify-content-between
+                                    align-items-center
+                                    gap-3">
+
+                            <div>
+
+                                <h6 class="fw-bold mb-1">
+                                    {{ application.role }}
+                                </h6>
+
+                                <p class="text-muted
+                                          small
+                                          mb-0">
+                                    {{ application.company_name }}
+
+                                    {% if application.location %}
+                                        · {{ application.location }}
+                                    {% endif %}
+                                </p>
+
+                            </div>
+
+                            <span class="badge text-bg-primary">
+                                {{ application.status }}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="text-center py-4">
+
+                <div class="fs-1 mb-2">
+                    💼
+                </div>
+
+                <h5 class="fw-bold">
+                    No applications yet
+                </h5>
+
+                <p class="text-muted">
+                    Add your first opportunity
+                    to start tracking your journey.
+                </p>
+
+                <a
+                    href="{{ url_for('applications.add') }}"
+                    class="btn btn-primary"
+                >
+                    Add Application
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>

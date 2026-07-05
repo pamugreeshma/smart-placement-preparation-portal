@@ -1,0 +1,136 @@
+<div class="card border-0 shadow-sm mt-4">
+
+    <div class="card-body p-4">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
+            <div>
+
+                <span class="text-muted small">
+                    LEARNING ANALYTICS
+                </span>
+
+                <h4 class="mb-0 mt-1">
+                    📈 Real Progress
+                </h4>
+
+            </div>
+
+            <span class="badge bg-primary-subtle text-primary px-3 py-2">
+
+                {{ overall_progress }}%
+
+            </span>
+
+        </div>
+
+
+        <div class="mb-4">
+
+            <div class="d-flex justify-content-between mb-2">
+
+                <span>
+                    Overall CareerForge Progress
+                </span>
+
+                <strong>
+                    {{ overall_progress }}%
+                </strong>
+
+            </div>
+
+
+            <div
+                class="progress"
+                style="height: 10px;"
+            >
+
+                <div
+                    class="progress-bar"
+                    role="progressbar"
+                    style="width: {{ overall_progress }}%;"
+                    aria-valuenow="{{ overall_progress }}"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                >
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="row g-3">
+
+            <div class="col-md-6">
+
+                <div class="p-3 rounded-4 bg-light h-100">
+
+                    <small class="text-muted">
+                        Completed Topics
+                    </small>
+
+                    <h3 class="mt-2 mb-0">
+
+                        {{ completed_topics }}
+
+                    </h3>
+
+                    <span class="small text-muted">
+
+                        out of {{ total_topics }}
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6">
+
+                <div class="p-3 rounded-4 bg-light h-100">
+
+                    <small class="text-muted">
+                        Active Roadmap
+                    </small>
+
+
+                    {% if active_roadmap %}
+
+                        <h5 class="mt-2 mb-1">
+
+                            {{ active_roadmap.title }}
+
+                        </h5>
+
+                        <span class="small text-primary">
+
+                            {{ active_progress }}% complete
+
+                        </span>
+
+                    {% else %}
+
+                        <h5 class="mt-2 mb-1">
+                            Not Started
+                        </h5>
+
+                        <a
+                            href="{{ url_for('roadmap.index') }}"
+                            class="small text-decoration-none"
+                        >
+                            Choose roadmap →
+                        </a>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

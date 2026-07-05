@@ -1,0 +1,207 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ roadmap.title }} | CareerForge
+{% endblock %}
+
+
+{% block content %}
+
+<section class="roadmap-detail-page">
+
+    <div class="container py-5">
+
+
+        <div class="roadmap-detail-hero">
+
+            <div>
+
+                <a
+                    href="{{ url_for('roadmap.index') }}"
+                    class="roadmap-back-link"
+                >
+                    <i class="bi bi-arrow-left"></i>
+                    All Roadmaps
+                </a>
+
+
+                <h1>
+                    {{ roadmap.title }}
+                </h1>
+
+
+                <p>
+                    {{ roadmap.description }}
+                </p>
+
+            </div>
+
+
+            <div class="roadmap-score-card">
+
+                <span>
+                    Overall Progress
+                </span>
+
+                <strong>
+                    {{ progress }}%
+                </strong>
+
+                <small>
+                    {{ completed_count }}
+                    of
+                    {{ total_topics }}
+                    topics completed
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="roadmap-main-progress">
+
+            <div
+                class="roadmap-main-progress-fill"
+                style="width: {{ progress }}%"
+            >
+            </div>
+
+        </div>
+
+
+        <div class="roadmap-stage-list">
+
+            {% for stage_name, topics in stages.items() %}
+
+                <section class="roadmap-stage">
+
+                    <div class="roadmap-stage-header">
+
+                        <div class="stage-number">
+                            {{ loop.index }}
+                        </div>
+
+                        <div>
+
+                            <span>
+                                STAGE {{ loop.index }}
+                            </span>
+
+                            <h2>
+                                {{ stage_name }}
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="roadmap-topic-list">
+
+                        {% for topic in topics %}
+
+                            <article
+                                class="roadmap-topic
+                                {% if topic.id in completed_topic_ids %}
+                                    completed
+                                {% endif %}"
+                            >
+
+                                <div class="topic-content">
+
+                                    <div class="topic-status-icon">
+
+                                        {% if topic.id in completed_topic_ids %}
+
+                                            <i class="bi bi-check-lg"></i>
+
+                                        {% else %}
+
+                                            <i class="bi bi-circle"></i>
+
+                                        {% endif %}
+
+                                    </div>
+
+
+                                    <div>
+
+                                        <h4>
+                                            {{ topic.title }}
+                                        </h4>
+
+                                        {% if topic.description %}
+
+                                            <p>
+                                                {{ topic.description }}
+                                            </p>
+
+                                        {% endif %}
+
+
+                                        <span class="topic-hours">
+
+                                            <i class="bi bi-clock"></i>
+
+                                            {{ topic.estimated_hours }}
+                                            hour{% if topic.estimated_hours != 1 %}s{% endif %}
+
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+                                <form
+                                    method="POST"
+                                    action="{{ url_for(
+                                        'roadmap.toggle_topic',
+                                        topic_id=topic.id
+                                    ) }}"
+                                >
+
+                                    <button
+                                        type="submit"
+                                        class="
+                                            topic-toggle-btn
+
+                                            {% if topic.id in completed_topic_ids %}
+                                                done
+                                            {% endif %}
+                                        "
+                                    >
+
+                                        {% if topic.id in completed_topic_ids %}
+
+                                            <i class="bi bi-check-circle-fill"></i>
+                                            Completed
+
+                                        {% else %}
+
+                                            Mark Complete
+
+                                        {% endif %}
+
+                                    </button>
+
+                                </form>
+
+                            </article>
+
+                        {% endfor %}
+
+                    </div>
+
+                </section>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

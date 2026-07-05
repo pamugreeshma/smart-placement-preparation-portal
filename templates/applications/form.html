@@ -1,0 +1,261 @@
+{% extends "base.html" %}
+
+{% block title %}
+{% if application %}
+Edit Application
+{% else %}
+Add Application
+{% endif %}
+| CareerForge
+{% endblock %}
+
+
+{% block content %}
+
+<section class="application-form-page">
+
+    <div class="container py-5">
+
+        <div class="application-form-shell">
+
+            <div class="form-page-heading">
+
+                <a
+                    href="{{ url_for('applications.index') }}"
+                    class="tracker-back-link"
+                >
+                    <i class="bi bi-arrow-left"></i>
+                    Back to Tracker
+                </a>
+
+
+                <h1>
+
+                    {% if application %}
+                        Edit Application
+                    {% else %}
+                        Add New Application
+                    {% endif %}
+
+                </h1>
+
+
+                <p>
+                    Keep every placement opportunity
+                    organized and up to date.
+                </p>
+
+            </div>
+
+
+            <form
+                method="POST"
+                class="application-form-card"
+            >
+
+                <div class="row g-4">
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+                            Company Name *
+                        </label>
+
+                        <input
+                            type="text"
+                            name="company_name"
+                            class="form-control form-control-lg"
+                            required
+                            value="{{ application.company_name if application else '' }}"
+                            placeholder="Example: Microsoft"
+                        >
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+                            Role *
+                        </label>
+
+                        <input
+                            type="text"
+                            name="role"
+                            class="form-control form-control-lg"
+                            required
+                            value="{{ application.role if application else '' }}"
+                            placeholder="Example: Software Engineer"
+                        >
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+                            Location
+                        </label>
+
+                        <input
+                            type="text"
+                            name="location"
+                            class="form-control"
+                            value="{{ application.location if application else '' }}"
+                            placeholder="Hyderabad / Remote"
+                        >
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+                            Status
+                        </label>
+
+                        <select
+                            name="status"
+                            class="form-select"
+                        >
+
+                            {% for status in statuses|sort %}
+
+                                <option
+                                    value="{{ status }}"
+
+                                    {% if application and application.status == status %}
+                                        selected
+                                    {% elif not application and status == "Applied" %}
+                                        selected
+                                    {% endif %}
+                                >
+                                    {{ status }}
+                                </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+                            Application Date
+                        </label>
+
+                        <input
+                            type="date"
+                            name="application_date"
+                            class="form-control"
+
+                            value="{% if application and application.application_date %}{{ application.application_date.strftime('%Y-%m-%d') }}{% endif %}"
+                        >
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+                            Interview Date & Time
+                        </label>
+
+                        <input
+                            type="datetime-local"
+                            name="interview_date"
+                            class="form-control"
+
+                            value="{% if application and application.interview_date %}{{ application.interview_date.strftime('%Y-%m-%dT%H:%M') }}{% endif %}"
+                        >
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+                            CTC / Salary
+                        </label>
+
+                        <input
+                            type="text"
+                            name="ctc"
+                            class="form-control"
+                            value="{{ application.ctc if application else '' }}"
+                            placeholder="Example: 12 LPA"
+                        >
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+                            Job URL
+                        </label>
+
+                        <input
+                            type="url"
+                            name="job_url"
+                            class="form-control"
+                            value="{{ application.job_url if application else '' }}"
+                            placeholder="https://..."
+                        >
+
+                    </div>
+
+
+                    <div class="col-12">
+
+                        <label class="form-label">
+                            Notes
+                        </label>
+
+                        <textarea
+                            name="notes"
+                            class="form-control"
+                            rows="5"
+                            placeholder="Interview preparation, recruiter details, next steps..."
+                        >{{ application.notes if application else '' }}</textarea>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <a
+                        href="{{ url_for('applications.index') }}"
+                        class="btn btn-outline-secondary"
+                    >
+                        Cancel
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                    >
+
+                        {% if application %}
+                            Save Changes
+                        {% else %}
+                            Add Application
+                        {% endif %}
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

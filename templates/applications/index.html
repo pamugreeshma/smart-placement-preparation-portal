@@ -1,0 +1,478 @@
+{% extends "base.html" %}
+
+{% block title %}
+Job Application Tracker | CareerForge
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container py-5">
+
+    <!-- HEADER -->
+
+    <div class="d-flex flex-wrap
+                justify-content-between
+                align-items-center
+                gap-3 mb-4">
+
+        <div>
+
+            <p class="text-primary fw-semibold mb-1">
+                CAREER PIPELINE
+            </p>
+
+            <h1 class="fw-bold mb-1">
+                Job Application Tracker
+            </h1>
+
+            <p class="text-muted mb-0">
+                Track every opportunity from wishlist
+                to final offer.
+            </p>
+
+        </div>
+
+        <a
+            href="{{ url_for('applications.add') }}"
+            class="btn btn-primary px-4 py-2"
+        >
+            <i class="bi bi-plus-lg me-2"></i>
+            Add Application
+        </a>
+
+    </div>
+
+
+    <!-- STATISTICS -->
+
+    <div class="row g-3 mb-4">
+
+        <div class="col-6 col-lg">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <span class="text-muted small">
+                        Total
+                    </span>
+
+                    <h3 class="fw-bold mb-0">
+                        {{ stats.total }}
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-6 col-lg">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <span class="text-muted small">
+                        Applied
+                    </span>
+
+                    <h3 class="fw-bold mb-0">
+                        {{ stats.applied }}
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-6 col-lg">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <span class="text-muted small">
+                        Interviews
+                    </span>
+
+                    <h3 class="fw-bold mb-0">
+                        {{ stats.interview }}
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-6 col-lg">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <span class="text-muted small">
+                        Offers
+                    </span>
+
+                    <h3 class="fw-bold mb-0">
+                        {{ stats.offer }}
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-6 col-lg">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <span class="text-muted small">
+                        Rejected
+                    </span>
+
+                    <h3 class="fw-bold mb-0">
+                        {{ stats.rejected }}
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- SEARCH + FILTER -->
+
+    <div class="card border-0 shadow-sm mb-4">
+
+        <div class="card-body">
+
+            <form
+                method="GET"
+                class="row g-3"
+            >
+
+                <div class="col-md-7">
+
+                    <input
+                        type="text"
+                        name="q"
+                        class="form-control"
+                        placeholder="Search company or role..."
+                        value="{{ search_query }}"
+                    >
+
+                </div>
+
+
+                <div class="col-md-3">
+
+                    <select
+                        name="status"
+                        class="form-select"
+                    >
+
+                        <option value="">
+                            All Statuses
+                        </option>
+
+                        {% for status in [
+                            "Wishlist",
+                            "Applied",
+                            "Assessment",
+                            "Interview",
+                            "Offer",
+                            "Rejected"
+                        ] %}
+
+                            <option
+                                value="{{ status }}"
+                                {% if selected_status == status %}
+                                    selected
+                                {% endif %}
+                            >
+                                {{ status }}
+                            </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <div class="col-md-2 d-grid">
+
+                    <button
+                        class="btn btn-dark"
+                        type="submit"
+                    >
+                        Filter
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- APPLICATION LIST -->
+
+    {% if applications %}
+
+        <div class="row g-4">
+
+            {% for application in applications %}
+
+                <div class="col-lg-6">
+
+                    <div class="card
+                                border-0
+                                shadow-sm
+                                h-100">
+
+                        <div class="card-body p-4">
+
+                            <div class="d-flex
+                                        justify-content-between
+                                        gap-3 mb-3">
+
+                                <div>
+
+                                    <h4 class="fw-bold mb-1">
+                                        {{ application.role }}
+                                    </h4>
+
+                                    <p class="text-primary
+                                              fw-semibold mb-0">
+                                        {{ application.company_name }}
+                                    </p>
+
+                                </div>
+
+                                <span class="badge
+                                             text-bg-primary
+                                             align-self-start">
+                                    {{ application.status }}
+                                </span>
+
+                            </div>
+
+
+                            {% if application.location %}
+
+                                <p class="text-muted mb-2">
+
+                                    <i class="bi bi-geo-alt me-2"></i>
+
+                                    {{ application.location }}
+
+                                </p>
+
+                            {% endif %}
+
+
+                            {% if application.application_date %}
+
+                                <p class="text-muted mb-2">
+
+                                    <i class="bi bi-calendar3 me-2"></i>
+
+                                    Applied:
+                                    {{ application.application_date }}
+
+                                </p>
+
+                            {% endif %}
+
+
+                            {% if application.ctc %}
+
+                                <p class="text-muted mb-3">
+
+                                    <i class="bi bi-cash-stack me-2"></i>
+
+                                    {{ application.ctc }}
+
+                                </p>
+
+                            {% endif %}
+
+
+                            <!-- QUICK STATUS -->
+
+                            <form
+                                method="POST"
+                                action="{{ url_for(
+                                    'applications.update_status',
+                                    application_id=application.id
+                                ) }}"
+                                class="mb-3"
+                            >
+
+                                <div class="input-group">
+
+                                    <select
+                                        name="status"
+                                        class="form-select"
+                                    >
+
+                                        {% for status in [
+                                            "Wishlist",
+                                            "Applied",
+                                            "Assessment",
+                                            "Interview",
+                                            "Offer",
+                                            "Rejected"
+                                        ] %}
+
+                                            <option
+                                                value="{{ status }}"
+                                                {% if application.status == status %}
+                                                    selected
+                                                {% endif %}
+                                            >
+                                                {{ status }}
+                                            </option>
+
+                                        {% endfor %}
+
+                                    </select>
+
+                                    <button
+                                        class="btn btn-outline-primary"
+                                        type="submit"
+                                    >
+                                        Update
+                                    </button>
+
+                                </div>
+
+                            </form>
+
+
+                            <!-- ACTIONS -->
+
+                            <div class="d-flex
+                                        flex-wrap
+                                        gap-2">
+
+                                <a
+                                    href="{{ url_for(
+                                        'applications.edit',
+                                        application_id=application.id
+                                    ) }}"
+                                    class="btn
+                                           btn-outline-dark
+                                           btn-sm"
+                                >
+                                    <i class="bi bi-pencil me-1"></i>
+                                    Edit
+                                </a>
+
+
+                                {% if application.job_url %}
+
+                                    <a
+                                        href="{{ application.job_url }}"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="btn
+                                               btn-outline-primary
+                                               btn-sm"
+                                    >
+                                        <i class="bi bi-box-arrow-up-right me-1"></i>
+                                        Job Link
+                                    </a>
+
+                                {% endif %}
+
+
+                                <form
+                                    method="POST"
+                                    action="{{ url_for(
+                                        'applications.delete',
+                                        application_id=application.id
+                                    ) }}"
+                                    onsubmit="return confirm(
+                                        'Delete this application?'
+                                    );"
+                                >
+
+                                    <button
+                                        type="submit"
+                                        class="btn
+                                               btn-outline-danger
+                                               btn-sm"
+                                    >
+                                        <i class="bi bi-trash me-1"></i>
+                                        Delete
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="card border-0 shadow-sm">
+
+            <div class="card-body
+                        text-center
+                        py-5">
+
+                <i class="bi bi-briefcase
+                          fs-1
+                          text-primary"></i>
+
+                <h3 class="fw-bold mt-3">
+                    No applications found
+                </h3>
+
+                <p class="text-muted">
+                    Start tracking your placement journey.
+                </p>
+
+                <a
+                    href="{{ url_for('applications.add') }}"
+                    class="btn btn-primary"
+                >
+                    Add First Application
+                </a>
+
+            </div>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

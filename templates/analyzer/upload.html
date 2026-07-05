@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}
+Resume Analyzer | CareerForge
+{% endblock %}
+
+
+{% block content %}
+
+<section class="analyzer-page">
+
+    <div class="container">
+
+        <div class="analyzer-hero">
+
+            <span class="analyzer-badge">
+                CareerForge Intelligence
+            </span>
+
+            <h1>
+                Resume Analyzer
+            </h1>
+
+            <p>
+                Upload your resume and receive an
+                ATS-style evaluation, skill analysis,
+                section checks and actionable recommendations.
+            </p>
+
+        </div>
+
+
+        <div class="upload-card">
+
+            <div class="upload-icon">
+                <i class="bi bi-file-earmark-pdf"></i>
+            </div>
+
+            <h3>
+                Analyze your resume
+            </h3>
+
+            <p class="text-muted">
+                PDF format only
+            </p>
+
+
+            <form
+                method="POST"
+                enctype="multipart/form-data"
+            >
+
+                <input
+                    type="file"
+                    name="resume"
+                    accept=".pdf"
+                    class="form-control form-control-lg"
+                    required
+                >
+
+                <button
+                    type="submit"
+                    class="btn btn-primary btn-lg w-100 mt-4"
+                >
+
+                    <i class="bi bi-stars me-2"></i>
+
+                    Analyze Resume
+
+                </button>
+
+            </form>
+
+        </div>
+
+
+        {% if analyses %}
+
+        <div class="analysis-history">
+
+            <h3>
+                Recent Analyses
+            </h3>
+
+            {% for item in analyses %}
+
+                <div class="history-item">
+
+                    <div>
+
+                        <strong>
+                            {{ item.file_name }}
+                        </strong>
+
+                        <small>
+                            {{ item.created_at.strftime("%d %b %Y") }}
+                        </small>
+
+                    </div>
+
+                    <div class="history-score">
+                        {{ item.ats_score }}/100
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

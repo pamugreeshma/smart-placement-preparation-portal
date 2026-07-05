@@ -1,0 +1,113 @@
+<div class="card border-0 shadow-sm mt-4">
+
+    <div class="card-body">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
+            <div>
+                <h4 class="mb-1">
+                    ⚡ Quick Actions
+                </h4>
+
+                <p class="text-muted mb-0">
+                    Continue building your career profile.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="quick-actions-grid">
+
+            <a
+                href="{{ url_for('analyzer.upload_resume') }}"
+                class="quick-action-card"
+            >
+
+                <div class="quick-action-icon">
+                    <i class="bi bi-file-earmark-bar-graph"></i>
+                </div>
+
+                <div>
+                    <strong>
+                        Analyze Resume
+                    </strong>
+
+                    <span>
+                        Get ATS-style insights
+                    </span>
+                </div>
+
+            </a>
+
+
+            <a
+                href="{{ url_for('resume.builder') }}"
+                class="quick-action-card"
+            >
+
+                <div class="quick-action-icon">
+                    <i class="bi bi-file-earmark-person"></i>
+                </div>
+
+                <div>
+                    <strong>
+                        Resume Builder
+                    </strong>
+
+                    <span>
+                        Create your professional resume
+                    </span>
+                </div>
+
+            </a>
+
+
+            <a
+                href="#"
+                class="quick-action-card"
+            >
+
+                <div class="quick-action-icon">
+                    <i class="bi bi-signpost-split"></i>
+                </div>
+
+                <div>
+                    <strong>
+                        Career Roadmap
+                    </strong>
+
+                    <span>
+                        Follow your learning path
+                    </span>
+                </div>
+
+            </a>
+
+
+            <a
+                href="{{ url_for('main.profile') }}"
+                class="quick-action-card"
+            >
+
+                <div class="quick-action-icon">
+                    <i class="bi bi-person-circle"></i>
+                </div>
+
+                <div>
+                    <strong>
+                        Update Profile
+                    </strong>
+
+                    <span>
+                        Keep your career profile current
+                    </span>
+                </div>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

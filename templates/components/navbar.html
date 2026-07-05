@@ -40,11 +40,28 @@
 
                 <li class="nav-item">
 
-                    <a class="btn btn-primary ms-3">
+                    
+                    {% if current_user.is_authenticated %}
 
-                        Login
-
+                    <a href="{{ url_for('main.profile') }}"
+                       class="btn btn-primary ms-3">
+                         Profile
                     </a>
+                    
+                    <a href="{{ url_for('resume.builder') }}"
+                       class="btn btn-outline-primary ms-2">
+                         Resume
+                    </a> 
+
+
+                    {% else %}
+
+                    <a href="{{ url_for('auth.login') }}"
+                       class="btn btn-primary ms-3">
+                        Login
+                    </a>
+
+                    {% endif %}
 
                 </li>
 
