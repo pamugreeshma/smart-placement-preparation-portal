@@ -1,0 +1,119 @@
+/* Interview Practice Module Scoped Styles */
+
+.interview-page {
+    min-height: 80vh;
+}
+
+.interview-page .interview-container {
+    max-width: 850px;
+    background: #ffffff;
+    margin: 20px auto;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.interview-page textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    resize: vertical;
+    font-size: 15px;
+    transition: border-color 0.2s ease;
+}
+
+.interview-page textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+}
+
+.interview-page .progress-container {
+    width: 100%;
+    background-color: #edf2f7;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.interview-page .progress-bar {
+    width: 100%;
+    height: 16px;
+    background: linear-gradient(135deg, #00c853, #64dd17);
+    border-radius: 20px;
+    transition: width 0.4s ease;
+}
+
+.interview-page .score-card {
+    background: #f8fafc;
+    padding: 24px;
+    border-radius: 14px;
+    border-left: 5px solid #667eea;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.interview-page .score-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+.interview-page #timer {
+    color: #e53e3e;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.interview-page .feedback-text {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.interview-page .evaluation-card {
+    background: #f8fafc;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.interview-page .summary-card {
+    background: #f8fafc;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.interview-page .big-text {
+    font-size: 28px;
+    font-weight: bold;
+    color: #2d3748;
+}
+
+.interview-page .performance {
+    margin-top: 20px;
+    color: #6a5acd;
+}
+
+.interview-page .primary-btn {
+    padding: 12px 28px;
+    font-size: 16px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border: none;
+    border-radius: 10px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.interview-page .primary-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(102, 126, 234, 0.4);
+    color: #ffffff;
+}

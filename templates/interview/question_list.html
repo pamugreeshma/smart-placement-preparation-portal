@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} - CareerForge{% endblock %}
+
+{% block content %}
+<div class="container py-4 interview-page">
+    <div class="interview-container">
+        <h1 class="fw-bold text-center mb-2">{{ title }}</h1>
+        <h4 id="timer" class="mb-4">⏰ Time Left: 60 seconds</h4>
+
+        <div class="progress-container mb-4">
+            <div class="progress-bar"></div>
+        </div>
+
+        <form action="{{ url_for('interview.result') }}" method="POST">
+            {% for question in questions %}
+                <div class="mb-4">
+                    <h5 class="fw-semibold text-dark mb-2">Q{{ loop.index }}. {{ question }}</h5>
+                    <textarea
+                        name="answer{{ loop.index }}"
+                        rows="4"
+                        class="form-control"
+                        placeholder="Type your answer here..."></textarea>
+                </div>
+            {% endfor %}
+
+            <div class="text-center mt-4">
+                <button type="submit" class="btn primary-btn btn-lg px-5">Submit Answers</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='js/interview.js') }}"></script>
+{% endblock %}

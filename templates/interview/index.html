@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block title %}Interview Practice - CareerForge{% endblock %}
+
+{% block content %}
+<div class="container py-4 interview-page">
+    <div class="interview-container text-center">
+        <h1 class="fw-bold mb-2">🤖 Interview Practice Module</h1>
+        <p class="text-muted mb-4">
+            Select your target role and practice real interview questions to boost your placement confidence.
+        </p>
+
+        <h4 class="mb-4">Welcome, {{ username }}! 👋</h4>
+
+        <!-- Practice Categories -->
+        <div class="row g-4 justify-content-center mb-5 text-start">
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm border-0 score-card">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold text-primary mb-3">
+                            <i class="bi bi-people-fill me-2"></i>HR Interview
+                        </h5>
+                        <p class="card-text text-muted small mb-4">
+                            Practice standard HR & behavioral questions to articulate your background and strengths.
+                        </p>
+                        <a href="{{ url_for('interview.hr') }}" class="btn primary-btn w-100">
+                            Start HR Questions
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm border-0 score-card">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold text-primary mb-3">
+                            <i class="bi bi-code-slash me-2"></i>Technical Interview
+                        </h5>
+                        <p class="card-text text-muted small mb-4">
+                            Core technical questions covering Python, OOP, SQL, and software development concepts.
+                        </p>
+                        <a href="{{ url_for('interview.technical') }}" class="btn primary-btn w-100">
+                            Start Technical Questions
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm border-0 score-card">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold text-primary mb-3">
+                            <i class="bi bi-calculator-fill me-2"></i>Aptitude Test
+                        </h5>
+                        <p class="card-text text-muted small mb-4">
+                            Test your quantitative aptitude and problem-solving speed with practice math sets.
+                        </p>
+                        <a href="{{ url_for('interview.aptitude') }}" class="btn primary-btn w-100">
+                            Start Aptitude Test
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Role-Based Technical Practice -->
+        <h3 class="fw-bold mb-4">Role-Based Technical Practice</h3>
+
+        <div class="row g-4 justify-content-center text-start">
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body text-center p-4">
+                        <h5 class="fw-bold mb-2">💻 Python Developer</h5>
+                        <p class="text-muted small mb-3">OOP, Data Structures, Flask, APIs</p>
+                        <a href="{{ url_for('interview.python_developer') }}" class="btn btn-outline-primary w-100">
+                            Practice Python Questions
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body text-center p-4">
+                        <h5 class="fw-bold mb-2">🧪 Software Tester</h5>
+                        <p class="text-muted small mb-3">SDLC, STLC, Automation, Selenium</p>
+                        <a href="{{ url_for('interview.tester') }}" class="btn btn-outline-primary w-100">
+                            Practice Tester Questions
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body text-center p-4">
+                        <h5 class="fw-bold mb-2">📊 Data Analyst</h5>
+                        <p class="text-muted small mb-3">SQL, Data Cleaning, Pandas, PowerBI</p>
+                        <a href="{{ url_for('interview.analyst') }}" class="btn btn-outline-primary w-100">
+                            Practice Analyst Questions
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Practice Section Preview -->
+        <div class="mt-5 p-4 rounded-3 bg-light border text-start">
+            <div class="d-flex align-items-center mb-3">
+                <i class="bi bi-robot text-primary fs-3 me-3"></i>
+                <div>
+                    <h5 class="fw-bold mb-0">🤖 Interactive AI Interview (Gemini Powered)</h5>
+                    <small class="text-muted">Dynamic AI-generated question sets & real-time evaluation</small>
+                </div>
+            </div>
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <a href="{{ url_for('interview.ai_interview', role='testing', level='beginner') }}" class="btn btn-sm btn-outline-secondary w-100">
+                        Testing AI Practice
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="{{ url_for('interview.ai_interview', role='python', level='beginner') }}" class="btn btn-sm btn-outline-secondary w-100">
+                        Python AI Practice
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="{{ url_for('interview.ai_interview', role='analyst', level='beginner') }}" class="btn btn-sm btn-outline-secondary w-100">
+                        Analyst AI Practice
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="{{ url_for('interview.ai_interview', role='hr', level='beginner') }}" class="btn btn-sm btn-outline-secondary w-100">
+                        HR AI Practice
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Aptitude Test Results - CareerForge{% endblock %}
+
+{% block content %}
+<div class="container py-4 interview-page">
+    <div class="interview-container text-center">
+        <h1 class="fw-bold mb-3">🎉 Test Completed</h1>
+
+        <div class="summary-card mb-4">
+            <h3 class="mb-2">Your Score: {{ score }}/3</h3>
+            {% if score == 3 %}
+                <p class="text-success fw-bold fs-5">🏆 Excellent Performance!</p>
+            {% elif score >= 2 %}
+                <p class="text-primary fw-bold fs-5">👍 Good Job!</p>
+            {% else %}
+                <p class="text-warning fw-bold fs-5">📚 Need More Practice</p>
+            {% endif %}
+        </div>
+
+        <div class="text-start mb-4">
+            {% for result in results %}
+                <div class="p-3 mb-3 rounded border {% if result.is_correct %}bg-success-subtle{% else %}bg-danger-subtle{% endif %}">
+                    <h6 class="fw-bold">Question {{ result.question_no }}</h6>
+                    {% if result.is_correct %}
+                        <p class="text-success mb-0 fw-semibold">✔ Correct</p>
+                    {% else %}
+                        <p class="text-danger mb-1 fw-semibold">❌ Incorrect</p>
+                        <p class="mb-1 small"><strong>Your Answer:</strong> {{ result.user_answer or "None" }}</p>
+                        <p class="mb-0 small"><strong>Correct Answer:</strong> {{ result.correct_answer }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <a href="{{ url_for('interview.index') }}" class="btn primary-btn px-4">
+            Back to Interview Hub
+        </a>
+    </div>
+</div>
+{% endblock %}

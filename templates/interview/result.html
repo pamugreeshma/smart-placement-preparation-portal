@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Interview Result - CareerForge{% endblock %}
+
+{% block content %}
+<div class="container py-4 interview-page">
+    <div class="interview-container text-center">
+        <h1 class="fw-bold mb-3">Interview Completed 🎉</h1>
+
+        <div class="summary-card mb-4">
+            <h2 class="fw-bold text-primary mb-3">Interview Summary</h2>
+            <p class="big-text mb-2">Attempted: {{ total_answers }} Questions</p>
+            <p class="lead text-dark mb-0">{{ feedback }}</p>
+        </div>
+
+        <p class="text-muted mb-4">
+            Thank you for practicing! Keep practicing every day to improve your performance.
+        </p>
+
+        <a href="{{ url_for('interview.index') }}" class="btn primary-btn px-4">
+            Back to Interview Hub
+        </a>
+    </div>
+</div>
+{% endblock %}

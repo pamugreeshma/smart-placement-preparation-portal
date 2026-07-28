@@ -35,6 +35,8 @@ from routes.resume import resume
 
 from routes.roadmap import roadmap
 
+from routes.interview import interview
+
 
 login_manager = LoginManager()
 
@@ -61,6 +63,7 @@ def create_app():
     app.register_blueprint(roadmap)
     app.register_blueprint(applications)
     app.register_blueprint(tasks)
+    app.register_blueprint(interview)
     return app
 
 
