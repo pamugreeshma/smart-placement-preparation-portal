@@ -1,0 +1,226 @@
+<div class="card border-0 shadow-sm mt-4">
+
+    <div class="card-body p-4">
+
+        <div class="d-flex
+                    justify-content-between
+                    align-items-center
+                    gap-3
+                    mb-4">
+
+            <div>
+
+                <p class="text-primary
+                          fw-semibold
+                          small
+                          mb-1">
+                    TODAY'S FOCUS
+                </p>
+
+                <h4 class="fw-bold mb-0">
+                    Daily Preparation
+                </h4>
+
+            </div>
+
+
+            <a
+                href="{{ url_for('tasks.add') }}"
+                class="btn btn-primary btn-sm"
+            >
+                <i class="bi bi-plus-lg"></i>
+                Add Task
+            </a>
+
+        </div>
+
+
+        <!-- XP + STREAK -->
+
+        <div class="row g-3 mb-4">
+
+            <div class="col-md-4">
+
+                <div class="dashboard-focus-stat">
+
+                    <span>
+                        Total XP
+                    </span>
+
+                    <strong>
+                        ⚡ {{ user_stats.total_xp }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="dashboard-focus-stat">
+
+                    <span>
+                        Current Streak
+                    </span>
+
+                    <strong>
+                        🔥 {{ user_stats.current_streak }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="dashboard-focus-stat">
+
+                    <span>
+                        Pending Tasks
+                    </span>
+
+                    <strong>
+                        {{ pending_tasks_count }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        {% if today_tasks %}
+
+            <div class="dashboard-task-list">
+
+                {% for task in today_tasks %}
+
+                    <div class="
+                        dashboard-task-item
+
+                        {% if task.completed %}
+                            task-done
+                        {% endif %}
+                    ">
+
+                        <div class="dashboard-task-main">
+
+                            <div class="dashboard-task-check">
+
+                                {% if task.completed %}
+
+                                    <i class="bi bi-check-lg"></i>
+
+                                {% else %}
+
+                                    <i class="bi bi-circle"></i>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <div>
+
+                                <h6 class="mb-1">
+                                    {{ task.title }}
+                                </h6>
+
+                                <div class="d-flex
+                                            flex-wrap
+                                            gap-2">
+
+                                    <span class="small text-muted">
+                                        {{ task.category }}
+                                    </span>
+
+                                    <span class="small text-primary">
+                                        +{{ task.xp_reward }} XP
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        {% if not task.completed %}
+
+                            <form
+                                method="POST"
+                                action="{{ url_for(
+                                    'tasks.complete',
+                                    task_id=task.id
+                                ) }}"
+                            >
+
+                                <button
+                                    class="btn
+                                           btn-outline-success
+                                           btn-sm"
+                                    type="submit"
+                                >
+                                    Complete
+                                </button>
+
+                            </form>
+
+                        {% else %}
+
+                            <span class="badge text-bg-success">
+                                Done
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <a
+                href="{{ url_for('tasks.index') }}"
+                class="btn btn-outline-primary mt-3"
+            >
+                View All Tasks
+                <i class="bi bi-arrow-right ms-1"></i>
+            </a>
+
+
+        {% else %}
+
+            <div class="dashboard-no-tasks">
+
+                <div class="fs-2 mb-2">
+                    🎯
+                </div>
+
+                <h5>
+                    Nothing scheduled for today
+                </h5>
+
+                <p class="text-muted mb-3">
+                    Plan a preparation task and keep
+                    your momentum going.
+                </p>
+
+                <a
+                    href="{{ url_for('tasks.add') }}"
+                    class="btn btn-primary"
+                >
+                    Plan Today's Task
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>

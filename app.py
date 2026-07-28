@@ -8,11 +8,17 @@ from routes.main import main
 
 from routes.auth import auth
 
+from models.task import Task
+
+from models.user_stats import UserStats
+
 from flask import Flask, render_template
 
 from flask_login import LoginManager
 
 from config import Config
+
+from routes.tasks import tasks
 
 from models import db
 
@@ -54,6 +60,7 @@ def create_app():
     app.register_blueprint(analyzer)
     app.register_blueprint(roadmap)
     app.register_blueprint(applications)
+    app.register_blueprint(tasks)
     return app
 
 

@@ -561,3 +561,125 @@ footer{
         height: 54px;
     }
 }
+/* =========================================
+   DAILY FOCUS DASHBOARD
+========================================= */
+
+.dashboard-focus-stat {
+    height: 100%;
+
+    padding: 18px;
+
+    background: #f8fafc;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+}
+
+
+.dashboard-focus-stat span {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #64748b;
+
+    font-size: 0.82rem;
+}
+
+
+.dashboard-focus-stat strong {
+    display: block;
+
+    color: #172033;
+
+    font-size: 1.35rem;
+}
+
+
+.dashboard-task-list {
+    display: grid;
+
+    gap: 11px;
+}
+
+
+.dashboard-task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 15px 16px;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+}
+
+
+.dashboard-task-item.task-done {
+    background: #f0fdf4;
+
+    border-color: #bbf7d0;
+}
+
+
+.dashboard-task-main {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+}
+
+
+.dashboard-task-check {
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 11px;
+
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+
+.task-done .dashboard-task-check {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+
+.task-done h6 {
+    color: #64748b;
+
+    text-decoration: line-through;
+}
+
+
+.dashboard-no-tasks {
+    padding: 30px;
+
+    text-align: center;
+
+    background: #f8fafc;
+
+    border: 1px dashed #cbd5e1;
+    border-radius: 18px;
+}
+
+
+@media (max-width: 576px) {
+
+    .dashboard-task-item {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
