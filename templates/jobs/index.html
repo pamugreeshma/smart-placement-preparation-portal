@@ -1,0 +1,310 @@
+{% extends "base.html" %}
+
+{% block title %}Job Search & Sector Exploration - CareerForge{% endblock %}
+
+{% block content %}
+<div class="container mt-4 jobs-page">
+
+    <!-- Hero Banner -->
+    <div class="jobs-hero">
+        <div class="row align-items-center">
+            <div class="col-lg-7 mb-3 mb-lg-0">
+                <h1 class="hero-title">Discover Career Opportunities</h1>
+                <p class="hero-subtitle">
+                    Explore curated sector insights, eligibility requirements, salary levels, and entry roadmaps across 170+ careers.
+                </p>
+                <div class="d-flex align-items-center gap-3">
+                    <span class="badge bg-primary px-3 py-2 fs-6">
+                        <i class="bi bi-briefcase-fill me-1"></i> {{ total_jobs_count }} Curated Jobs
+                    </span>
+                    <span class="badge bg-dark px-3 py-2 fs-6 border border-secondary">
+                        <i class="bi bi-grid-fill me-1"></i> {{ sectors|length }} Sectors
+                    </span>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <!-- Search Box -->
+                <form action="{{ url_for('jobs.index') }}" method="GET" class="search-box-wrapper">
+                    {% if active_sector and active_sector != 'all' %}
+                        <input type="hidden" name="sector" value="{{ active_sector }}">
+                    {% endif %}
+                    <div class="input-group">
+                        <input type="text"
+                               name="q"
+                               class="form-control"
+                               placeholder="Search jobs, skills, keywords..."
+                               value="{{ search_query }}">
+                        <button type="submit" class="btn btn-search">
+                            <i class="bi bi-search me-1"></i> Search
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sector Filter Pills -->
+    <div class="d-flex align-items-center justify-content-between mb-2">
+        <h5 class="fw-bold mb-0 text-dark">
+            <i class="bi bi-filter-circle text-primary me-2"></i>Browse by Sector
+        </h5>
+        {% if active_sector != 'all' or search_query %}
+            <a href="{{ url_for('jobs.index') }}" class="btn btn-sm btn-outline-secondary">
+                <i class="bi bi-x-circle me-1"></i> Reset Filters
+            </a>
+        {% endif %}
+    </div>
+
+    <div class="sector-pills-container mt-3">
+        <a href="{{ url_for('jobs.index', q=search_query) }}"
+           class="sector-pill {% if active_sector == 'all' %}active{% endif %}">
+            <span>🌐 All Sectors</span>
+            <span class="badge-count">{{ total_jobs_count }}</span>
+        </a>
+        {% for sec in sectors %}
+            <a href="{{ url_for('jobs.index', sector=sec.id, q=search_query) }}"
+               class="sector-pill {% if active_sector == sec.id %}active{% endif %}">
+                <span>{{ sec.emoji }} {{ sec.title }}</span>
+                <span class="badge-count">{{ sec.count }}</span>
+            </a>
+        {% endfor %}
+    </div>
+
+    <!-- Results Header -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <p class="text-muted mb-0">
+            Showing <strong class="text-dark">{{ filtered_count }}</strong> job{% if filtered_count != 1 %}s{% endif %}
+            {% if search_query %} matching "<strong class="text-primary">{{ search_query }}</strong>"{% endif %}
+            {% if active_sector != 'all' %} in selected sector{% endif %}
+        </p>
+    </div>
+
+    <!-- Jobs Cards Grid -->
+    {% if jobs %}
+        <div class="jobs-grid">
+            {% for job in jobs %}
+                <div class="job-card">
+                    <div>
+                        <div class="job-card-header">
+                            <h3 class="job-title">{{ job.title }}</h3>
+                            <span class="sector-badge">
+                                {{ job.sector_emoji }} {{ job.sector_title }}
+                            </span>
+                        </div>
+
+                        {% if job.department %}
+                            <div class="job-department">
+                                <i class="bi bi-building me-1"></i> {{ job.department }}
+                            </div>
+                        {% endif %}
+
+                        <p class="job-description">
+                            {{ job.description or 'Explore entry criteria, skill requirements, and career progression details.' }}
+                        </p>
+
+                        <ul class="job-meta-list">
+                            {% if job.degree %}
+                                <li class="job-meta-item">
+                                    <i class="bi bi-mortarboard-fill"></i>
+                                    <span><strong>Degree:</strong> {{ job.degree }}</span>
+                                </li>
+                            {% endif %}
+                            {% if job.age %}
+                                <li class="job-meta-item">
+                                    <i class="bi bi-person-badge"></i>
+                                    <span><strong>Age Limit:</strong> {{ job.age }}</span>
+                                </li>
+                            {% endif %}
+                        </ul>
+
+                        {% if job.skills %}
+                            <div class="skills-tags">
+                                {% for skill in job.skills.split(',')[:3] %}
+                                    <span class="skill-tag">{{ skill.strip() }}</span>
+                                {% endfor %}
+                                {% if job.skills.split(',')|length > 3 %}
+                                    <span class="skill-tag">+{{ job.skills.split(',')|length - 3 }} more</span>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div>
+                        <button type="button"
+                                class="btn-view-details"
+                                data-bs-toggle="modal"
+                                data-bs-target="#jobModal-{{ loop.index }}">
+                            <i class="bi bi-info-circle me-1"></i> View Details
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Job Details Modal -->
+                <div class="modal fade" id="jobModal-{{ loop.index }}" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div>
+                                    <div class="d-flex align-items-center gap-2 mb-1">
+                                        <span class="sector-badge">
+                                            {{ job.sector_emoji }} {{ job.sector_title }}
+                                        </span>
+                                        {% if job.department %}
+                                            <span class="badge bg-secondary">{{ job.department }}</span>
+                                        {% endif %}
+                                    </div>
+                                    <h4 class="modal-title mb-0">{{ job.title }}</h4>
+                                </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+
+                                <!-- Overview Section -->
+                                <div class="detail-section">
+                                    <h6 class="detail-section-title">
+                                        <i class="bi bi-file-text-fill"></i> Overview & Description
+                                    </h6>
+                                    <div class="detail-card-info">
+                                        {{ job.description or 'No specific overview available.' }}
+                                    </div>
+                                </div>
+
+                                <!-- Eligibility & Requirements -->
+                                <div class="row g-3 detail-section">
+                                    <div class="col-md-6">
+                                        <h6 class="detail-section-title">
+                                            <i class="bi bi-mortarboard-fill"></i> Qualification / Degree
+                                        </h6>
+                                        <div class="detail-card-info">
+                                            {{ job.degree or 'As per notification' }}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6 class="detail-section-title">
+                                            <i class="bi bi-person-lines-fill"></i> Age Limit & Criteria
+                                        </h6>
+                                        <div class="detail-card-info">
+                                            {{ job.age or 'Not specified' }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Skills & Experience -->
+                                {% if job.skills or job.experience %}
+                                    <div class="row g-3 detail-section">
+                                        {% if job.skills %}
+                                            <div class="col-md-12">
+                                                <h6 class="detail-section-title">
+                                                    <i class="bi bi-stars"></i> Required Skills
+                                                </h6>
+                                                <div class="detail-card-info">
+                                                    {{ job.skills }}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                        {% if job.experience %}
+                                            <div class="col-md-12">
+                                                <h6 class="detail-section-title">
+                                                    <i class="bi bi-clock-history"></i> Experience Requirements
+                                                </h6>
+                                                <div class="detail-card-info">
+                                                    {{ job.experience }}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+
+                                <!-- Pay Scale -->
+                                {% if job.pay and job.pay is mapping %}
+                                    <div class="detail-section">
+                                        <h6 class="detail-section-title">
+                                            <i class="bi bi-cash-stack"></i> Pay Matrix & Salary Scale
+                                        </h6>
+                                        <div class="pay-grid">
+                                            {% for pay_tier, pay_data in job.pay.items() %}
+                                                <div class="pay-box">
+                                                    <div class="pay-box-title">Tier {{ pay_tier }}</div>
+                                                    <div class="pay-box-value">{{ pay_data.monthly_total or pay_data.basic or 'N/A' }}</div>
+                                                    {% if pay_data.annual %}
+                                                        <div class="text-muted" style="font-size:0.72rem;">{{ pay_data.annual }}</div>
+                                                    {% endif %}
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                                <!-- Career Roadmap & Growth -->
+                                {% if job.roadmap or job.career_growth %}
+                                    <div class="detail-section">
+                                        <h6 class="detail-section-title">
+                                            <i class="bi bi-signpost-split-fill"></i> Entry Roadmap & Growth
+                                        </h6>
+                                        <div class="detail-card-info">
+                                            {% if job.roadmap %}
+                                                <p class="mb-2"><strong>Roadmap:</strong> {{ job.roadmap }}</p>
+                                            {% endif %}
+                                            {% if job.career_growth %}
+                                                <p class="mb-0"><strong>Career Growth:</strong> {{ job.career_growth }}</p>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                                <!-- Resume Tips & Selection Process -->
+                                {% if job.resume_tips or job.selection_process %}
+                                    <div class="detail-section">
+                                        <h6 class="detail-section-title">
+                                            <i class="bi bi-check2-square"></i> Selection & Resume Guidance
+                                        </h6>
+                                        <div class="detail-card-info">
+                                            {% if job.selection_process %}
+                                                <p class="mb-2"><strong>Selection Process:</strong> {{ job.selection_process }}</p>
+                                            {% endif %}
+                                            {% if job.resume_tips %}
+                                                <p class="mb-0"><strong>Resume Tips:</strong> {{ job.resume_tips }}</p>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                                <!-- Application Notes & Official Link -->
+                                {% if job.apply_link or job.recruitment_status %}
+                                    <div class="detail-section mb-0">
+                                        <h6 class="detail-section-title">
+                                            <i class="bi bi-link-45deg"></i> Official Notification / Status
+                                        </h6>
+                                        <div class="detail-card-info d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <span>{{ job.recruitment_status or 'Refer to official recruitment portals.' }}</span>
+                                            </div>
+                                            {% if job.apply_link %}
+                                                <a href="{{ job.apply_link }}" target="_blank" rel="noopener" class="btn btn-sm btn-primary ms-3">
+                                                    Official Portal <i class="bi bi-box-arrow-up-right ms-1"></i>
+                                                </a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-jobs-state">
+            <i class="bi bi-search"></i>
+            <h4>No Jobs Found</h4>
+            <p class="mb-3">We couldn't find any job opportunities matching your criteria.</p>
+            <a href="{{ url_for('jobs.index') }}" class="btn btn-primary">
+                View All Jobs
+            </a>
+        </div>
+    {% endif %}
+
+</div>
+{% endblock %}
