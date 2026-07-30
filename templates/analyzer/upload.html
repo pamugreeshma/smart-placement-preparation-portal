@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-Resume Analyzer | CareerForge
+Resume Analyzer | Smart Placement Preparation Portal
 {% endblock %}
 
 
@@ -14,7 +14,7 @@ Resume Analyzer | CareerForge
         <div class="analyzer-hero">
 
             <span class="analyzer-badge">
-                CareerForge Intelligence
+                Smart Placement Preparation Portal Intelligence
             </span>
 
             <h1>
@@ -45,23 +45,11 @@ Resume Analyzer | CareerForge
             </p>
 
 
-            <form
-                method="POST"
-                enctype="multipart/form-data"
-            >
+            <form method="POST" enctype="multipart/form-data">
 
-                <input
-                    type="file"
-                    name="resume"
-                    accept=".pdf"
-                    class="form-control form-control-lg"
-                    required
-                >
+                <input type="file" name="resume" accept=".pdf" class="form-control form-control-lg" required>
 
-                <button
-                    type="submit"
-                    class="btn btn-primary btn-lg w-100 mt-4"
-                >
+                <button type="submit" class="btn btn-primary btn-lg w-100 mt-4">
 
                     <i class="bi bi-stars me-2"></i>
 
@@ -84,25 +72,25 @@ Resume Analyzer | CareerForge
 
             {% for item in analyses %}
 
-                <div class="history-item">
+            <div class="history-item">
 
-                    <div>
+                <div>
 
-                        <strong>
-                            {{ item.file_name }}
-                        </strong>
+                    <strong>
+                        {{ item.file_name }}
+                    </strong>
 
-                        <small>
-                            {{ item.created_at.strftime("%d %b %Y") }}
-                        </small>
-
-                    </div>
-
-                    <div class="history-score">
-                        {{ item.ats_score }}/100
-                    </div>
+                    <small>
+                        {{ item.created_at.strftime("%d %b %Y") }}
+                    </small>
 
                 </div>
+
+                <div class="history-score">
+                    {{ item.ats_score }}/100
+                </div>
+
+            </div>
 
             {% endfor %}
 

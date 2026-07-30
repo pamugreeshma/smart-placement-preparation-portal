@@ -1,1 +1,1 @@
-console.log("CareerForge Loaded Successfully 🚀");
+console.log("Portal Loaded Successfully 🚀");

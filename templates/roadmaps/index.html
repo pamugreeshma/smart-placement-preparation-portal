@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-Career Roadmaps | CareerForge
+Career Roadmaps | Smart Placement Preparation Portal
 {% endblock %}
 
 
@@ -16,7 +16,7 @@ Career Roadmaps | CareerForge
             <div>
 
                 <span class="roadmap-eyebrow">
-                    CAREERFORGE LEARNING PATHS
+                    SMART PLACEMENT PREPARATION PORTAL LEARNING PATHS
                 </span>
 
                 <h1>
@@ -36,98 +36,92 @@ Career Roadmaps | CareerForge
 
         {% if roadmap_data %}
 
-            <div class="roadmap-grid">
+        <div class="roadmap-grid">
 
-                {% for item in roadmap_data %}
+            {% for item in roadmap_data %}
 
-                    <article class="roadmap-card">
+            <article class="roadmap-card">
 
-                        <div class="roadmap-card-top">
+                <div class="roadmap-card-top">
 
-                            <div class="roadmap-icon">
+                    <div class="roadmap-icon">
 
-                                <i class="bi {{ item.roadmap.icon }}"></i>
+                        <i class="bi {{ item.roadmap.icon }}"></i>
 
-                            </div>
+                    </div>
 
-                            <span class="roadmap-progress-pill">
-                                {{ item.progress }}%
-                            </span>
+                    <span class="roadmap-progress-pill">
+                        {{ item.progress }}%
+                    </span>
 
-                        </div>
-
-
-                        <h3>
-                            {{ item.roadmap.title }}
-                        </h3>
+                </div>
 
 
-                        <p>
-                            {{ item.roadmap.description }}
-                        </p>
+                <h3>
+                    {{ item.roadmap.title }}
+                </h3>
 
 
-                        <div class="roadmap-meta">
-
-                            <span>
-                                <i class="bi bi-list-check"></i>
-
-                                {{ item.completed_topics }}
-                                /
-                                {{ item.total_topics }}
-                                topics
-                            </span>
-
-                        </div>
+                <p>
+                    {{ item.roadmap.description }}
+                </p>
 
 
-                        <div class="roadmap-progress-track">
+                <div class="roadmap-meta">
 
-                            <div
-                                class="roadmap-progress-fill"
-                                style="width: {{ item.progress }}%"
-                            >
-                            </div>
+                    <span>
+                        <i class="bi bi-list-check"></i>
 
-                        </div>
+                        {{ item.completed_topics }}
+                        /
+                        {{ item.total_topics }}
+                        topics
+                    </span>
+
+                </div>
 
 
-                        <a
-                            href="{{ url_for(
+                <div class="roadmap-progress-track">
+
+                    <div class="roadmap-progress-fill" style="width: {{ item.progress }}%">
+                    </div>
+
+                </div>
+
+
+                <a href="{{ url_for(
                                 'roadmap.detail',
                                 slug=item.roadmap.slug
-                            ) }}"
-                            class="btn btn-primary w-100 mt-4"
-                        >
-                            {% if item.progress > 0 %}
-                                Continue Roadmap
-                            {% else %}
-                                Start Roadmap
-                            {% endif %}
-                        </a>
+                            ) }}" class="btn btn-primary w-100 mt-4">
+                    {% if item.progress > 0 %}
+                    Continue Roadmap
+                    {% else %}
+                    Start Roadmap
+                    {% endif %}
+                </a>
 
-                    </article>
+            </article>
 
-                {% endfor %}
+            {% endfor %}
 
-            </div>
+        </div>
 
         {% else %}
 
-            <div class="roadmap-empty-state">
+        <div class="roadmap-empty-state">
 
-                <i class="bi bi-signpost-split"></i>
+            <i class="bi bi-signpost-split"></i>
 
-                <h3>
-                    Roadmaps are being prepared
-                </h3>
+            <h3>
+                Roadmaps are being prepared
+            </h3>
 
-                <p>
-                    Seed the CareerForge roadmap database
-                    to begin.
-                </p>
+            <p>
+                Seed the roadmap database
+                to begin.
+            </p>
 
-            </div>
+        </div>
 
         {% endif %}
 

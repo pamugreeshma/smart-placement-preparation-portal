@@ -6,7 +6,7 @@ Edit Application
 {% else %}
 Add Application
 {% endif %}
-| CareerForge
+| Smart Placement Preparation Portal
 {% endblock %}
 
 
@@ -20,10 +20,7 @@ Add Application
 
             <div class="form-page-heading">
 
-                <a
-                    href="{{ url_for('applications.index') }}"
-                    class="tracker-back-link"
-                >
+                <a href="{{ url_for('applications.index') }}" class="tracker-back-link">
                     <i class="bi bi-arrow-left"></i>
                     Back to Tracker
                 </a>
@@ -32,9 +29,9 @@ Add Application
                 <h1>
 
                     {% if application %}
-                        Edit Application
+                    Edit Application
                     {% else %}
-                        Add New Application
+                    Add New Application
                     {% endif %}
 
                 </h1>
@@ -48,10 +45,7 @@ Add Application
             </div>
 
 
-            <form
-                method="POST"
-                class="application-form-card"
-            >
+            <form method="POST" class="application-form-card">
 
                 <div class="row g-4">
 
@@ -61,14 +55,9 @@ Add Application
                             Company Name *
                         </label>
 
-                        <input
-                            type="text"
-                            name="company_name"
-                            class="form-control form-control-lg"
-                            required
+                        <input type="text" name="company_name" class="form-control form-control-lg" required
                             value="{{ application.company_name if application else '' }}"
-                            placeholder="Example: Microsoft"
-                        >
+                            placeholder="Example: Microsoft">
 
                     </div>
 
@@ -79,14 +68,9 @@ Add Application
                             Role *
                         </label>
 
-                        <input
-                            type="text"
-                            name="role"
-                            class="form-control form-control-lg"
-                            required
+                        <input type="text" name="role" class="form-control form-control-lg" required
                             value="{{ application.role if application else '' }}"
-                            placeholder="Example: Software Engineer"
-                        >
+                            placeholder="Example: Software Engineer">
 
                     </div>
 
@@ -97,13 +81,8 @@ Add Application
                             Location
                         </label>
 
-                        <input
-                            type="text"
-                            name="location"
-                            class="form-control"
-                            value="{{ application.location if application else '' }}"
-                            placeholder="Hyderabad / Remote"
-                        >
+                        <input type="text" name="location" class="form-control"
+                            value="{{ application.location if application else '' }}" placeholder="Hyderabad / Remote">
 
                     </div>
 
@@ -114,24 +93,14 @@ Add Application
                             Status
                         </label>
 
-                        <select
-                            name="status"
-                            class="form-select"
-                        >
+                        <select name="status" class="form-select">
 
                             {% for status in statuses|sort %}
 
-                                <option
-                                    value="{{ status }}"
-
-                                    {% if application and application.status == status %}
-                                        selected
-                                    {% elif not application and status == "Applied" %}
-                                        selected
-                                    {% endif %}
-                                >
-                                    {{ status }}
-                                </option>
+                            <option value="{{ status }}" {% if application and application.status==status %} selected {%
+                                elif not application and status=="Applied" %} selected {% endif %}>
+                                {{ status }}
+                            </option>
 
                             {% endfor %}
 
@@ -146,13 +115,8 @@ Add Application
                             Application Date
                         </label>
 
-                        <input
-                            type="date"
-                            name="application_date"
-                            class="form-control"
-
-                            value="{% if application and application.application_date %}{{ application.application_date.strftime('%Y-%m-%d') }}{% endif %}"
-                        >
+                        <input type="date" name="application_date" class="form-control"
+                            value="{% if application and application.application_date %}{{ application.application_date.strftime('%Y-%m-%d') }}{% endif %}">
 
                     </div>
 
@@ -163,13 +127,8 @@ Add Application
                             Interview Date & Time
                         </label>
 
-                        <input
-                            type="datetime-local"
-                            name="interview_date"
-                            class="form-control"
-
-                            value="{% if application and application.interview_date %}{{ application.interview_date.strftime('%Y-%m-%dT%H:%M') }}{% endif %}"
-                        >
+                        <input type="datetime-local" name="interview_date" class="form-control"
+                            value="{% if application and application.interview_date %}{{ application.interview_date.strftime('%Y-%m-%dT%H:%M') }}{% endif %}">
 
                     </div>
 
@@ -180,13 +139,8 @@ Add Application
                             CTC / Salary
                         </label>
 
-                        <input
-                            type="text"
-                            name="ctc"
-                            class="form-control"
-                            value="{{ application.ctc if application else '' }}"
-                            placeholder="Example: 12 LPA"
-                        >
+                        <input type="text" name="ctc" class="form-control"
+                            value="{{ application.ctc if application else '' }}" placeholder="Example: 12 LPA">
 
                     </div>
 
@@ -197,13 +151,8 @@ Add Application
                             Job URL
                         </label>
 
-                        <input
-                            type="url"
-                            name="job_url"
-                            class="form-control"
-                            value="{{ application.job_url if application else '' }}"
-                            placeholder="https://..."
-                        >
+                        <input type="url" name="job_url" class="form-control"
+                            value="{{ application.job_url if application else '' }}" placeholder="https://...">
 
                     </div>
 
@@ -214,12 +163,8 @@ Add Application
                             Notes
                         </label>
 
-                        <textarea
-                            name="notes"
-                            class="form-control"
-                            rows="5"
-                            placeholder="Interview preparation, recruiter details, next steps..."
-                        >{{ application.notes if application else '' }}</textarea>
+                        <textarea name="notes" class="form-control" rows="5"
+                            placeholder="Interview preparation, recruiter details, next steps...">{{ application.notes if application else '' }}</textarea>
 
                     </div>
 
@@ -228,22 +173,16 @@ Add Application
 
                 <div class="form-actions">
 
-                    <a
-                        href="{{ url_for('applications.index') }}"
-                        class="btn btn-outline-secondary"
-                    >
+                    <a href="{{ url_for('applications.index') }}" class="btn btn-outline-secondary">
                         Cancel
                     </a>
 
-                    <button
-                        type="submit"
-                        class="btn btn-primary"
-                    >
+                    <button type="submit" class="btn btn-primary">
 
                         {% if application %}
-                            Save Changes
+                        Save Changes
                         {% else %}
-                            Add Application
+                        Add Application
                         {% endif %}
 
                     </button>

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Aptitude Test - CareerForge{% endblock %}
+{% block title %}Aptitude Test - Smart{% endblock %}
 
 {% block content %}
 <div class="container py-4 interview-page">
@@ -9,14 +9,11 @@
 
         <form action="{{ url_for('interview.aptitude_result') }}" method="POST">
             {% for q in questions %}
-                <div class="mb-4 p-3 bg-light rounded border">
-                    <h5 class="fw-semibold mb-3">Q{{ loop.index }}. {{ q.question }}</h5>
-                    <input
-                        type="text"
-                        name="answer{{ loop.index }}"
-                        class="form-control"
-                        placeholder="Enter your numerical answer">
-                </div>
+            <div class="mb-4 p-3 bg-light rounded border">
+                <h5 class="fw-semibold mb-3">Q{{ loop.index }}. {{ q.question }}</h5>
+                <input type="text" name="answer{{ loop.index }}" class="form-control"
+                    placeholder="Enter your numerical answer">
+            </div>
             {% endfor %}
 
             <div class="text-center mt-4">

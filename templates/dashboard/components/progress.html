@@ -30,7 +30,7 @@
             <div class="d-flex justify-content-between mb-2">
 
                 <span>
-                    Overall CareerForge Progress
+                    Overall CareerForgeProgress
                 </span>
 
                 <strong>
@@ -40,19 +40,10 @@
             </div>
 
 
-            <div
-                class="progress"
-                style="height: 10px;"
-            >
+            <div class="progress" style="height: 10px;">
 
-                <div
-                    class="progress-bar"
-                    role="progressbar"
-                    style="width: {{ overall_progress }}%;"
-                    aria-valuenow="{{ overall_progress }}"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                >
+                <div class="progress-bar" role="progressbar" style="width: {{ overall_progress }}%;"
+                    aria-valuenow="{{ overall_progress }}" aria-valuemin="0" aria-valuemax="100">
                 </div>
 
             </div>
@@ -98,30 +89,27 @@
 
                     {% if active_roadmap %}
 
-                        <h5 class="mt-2 mb-1">
+                    <h5 class="mt-2 mb-1">
 
-                            {{ active_roadmap.title }}
+                        {{ active_roadmap.title }}
 
-                        </h5>
+                    </h5>
 
-                        <span class="small text-primary">
+                    <span class="small text-primary">
 
-                            {{ active_progress }}% complete
+                        {{ active_progress }}% complete
 
-                        </span>
+                    </span>
 
                     {% else %}
 
-                        <h5 class="mt-2 mb-1">
-                            Not Started
-                        </h5>
+                    <h5 class="mt-2 mb-1">
+                        Not Started
+                    </h5>
 
-                        <a
-                            href="{{ url_for('roadmap.index') }}"
-                            class="small text-decoration-none"
-                        >
-                            Choose roadmap →
-                        </a>
+                    <a href="{{ url_for('roadmap.index') }}" class="small text-decoration-none">
+                        Choose roadmap →
+                    </a>
 
                     {% endif %}
 

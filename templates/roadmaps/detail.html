@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-{{ roadmap.title }} | CareerForge
+{{ roadmap.title }} | Smart Placement Preparation Portal
 {% endblock %}
 
 
@@ -16,10 +16,7 @@
 
             <div>
 
-                <a
-                    href="{{ url_for('roadmap.index') }}"
-                    class="roadmap-back-link"
-                >
+                <a href="{{ url_for('roadmap.index') }}" class="roadmap-back-link">
                     <i class="bi bi-arrow-left"></i>
                     All Roadmaps
                 </a>
@@ -61,10 +58,7 @@
 
         <div class="roadmap-main-progress">
 
-            <div
-                class="roadmap-main-progress-fill"
-                style="width: {{ progress }}%"
-            >
+            <div class="roadmap-main-progress-fill" style="width: {{ progress }}%">
             </div>
 
         </div>
@@ -74,127 +68,119 @@
 
             {% for stage_name, topics in stages.items() %}
 
-                <section class="roadmap-stage">
+            <section class="roadmap-stage">
 
-                    <div class="roadmap-stage-header">
+                <div class="roadmap-stage-header">
 
-                        <div class="stage-number">
-                            {{ loop.index }}
-                        </div>
+                    <div class="stage-number">
+                        {{ loop.index }}
+                    </div>
 
-                        <div>
+                    <div>
 
-                            <span>
-                                STAGE {{ loop.index }}
-                            </span>
+                        <span>
+                            STAGE {{ loop.index }}
+                        </span>
 
-                            <h2>
-                                {{ stage_name }}
-                            </h2>
-
-                        </div>
+                        <h2>
+                            {{ stage_name }}
+                        </h2>
 
                     </div>
 
+                </div>
 
-                    <div class="roadmap-topic-list">
 
-                        {% for topic in topics %}
+                <div class="roadmap-topic-list">
 
-                            <article
-                                class="roadmap-topic
+                    {% for topic in topics %}
+
+                    <article class="roadmap-topic
                                 {% if topic.id in completed_topic_ids %}
                                     completed
-                                {% endif %}"
-                            >
+                                {% endif %}">
 
-                                <div class="topic-content">
+                        <div class="topic-content">
 
-                                    <div class="topic-status-icon">
+                            <div class="topic-status-icon">
 
-                                        {% if topic.id in completed_topic_ids %}
+                                {% if topic.id in completed_topic_ids %}
 
-                                            <i class="bi bi-check-lg"></i>
+                                <i class="bi bi-check-lg"></i>
 
-                                        {% else %}
+                                {% else %}
 
-                                            <i class="bi bi-circle"></i>
+                                <i class="bi bi-circle"></i>
 
-                                        {% endif %}
+                                {% endif %}
 
-                                    </div>
-
-
-                                    <div>
-
-                                        <h4>
-                                            {{ topic.title }}
-                                        </h4>
-
-                                        {% if topic.description %}
-
-                                            <p>
-                                                {{ topic.description }}
-                                            </p>
-
-                                        {% endif %}
+                            </div>
 
 
-                                        <span class="topic-hours">
+                            <div>
 
-                                            <i class="bi bi-clock"></i>
+                                <h4>
+                                    {{ topic.title }}
+                                </h4>
 
-                                            {{ topic.estimated_hours }}
-                                            hour{% if topic.estimated_hours != 1 %}s{% endif %}
+                                {% if topic.description %}
 
-                                        </span>
+                                <p>
+                                    {{ topic.description }}
+                                </p>
 
-                                    </div>
-
-                                </div>
+                                {% endif %}
 
 
-                                <form
-                                    method="POST"
-                                    action="{{ url_for(
+                                <span class="topic-hours">
+
+                                    <i class="bi bi-clock"></i>
+
+                                    {{ topic.estimated_hours }}
+                                    hour{% if topic.estimated_hours != 1 %}s{% endif %}
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <form method="POST" action="{{ url_for(
                                         'roadmap.toggle_topic',
                                         topic_id=topic.id
-                                    ) }}"
-                                >
+                                    ) }}">
 
-                                    <button
-                                        type="submit"
-                                        class="
+                            <button type="submit" class="
                                             topic-toggle-btn
 
                                             {% if topic.id in completed_topic_ids %}
                                                 done
                                             {% endif %}
-                                        "
-                                    >
+                                        ">
 
-                                        {% if topic.id in completed_topic_ids %}
+                                {% if topic.id in completed_topic_ids %}
 
-                                            <i class="bi bi-check-circle-fill"></i>
-                                            Completed
+                                <i class="bi bi-check-circle-fill"></i>
+                                Completed
 
-                                        {% else %}
+                                {% else %}
 
-                                            Mark Complete
+                                Mark Complete
 
-                                        {% endif %}
+                                {% endif %}
 
-                                    </button>
+                            </button>
 
-                                </form>
+                        </form>
 
-                            </article>
+                    </article>
 
-                        {% endfor %}
+                    {% endfor %}
 
-                    </div>
+                </div>
 
-                </section>
+            </section>
 
             {% endfor %}
 

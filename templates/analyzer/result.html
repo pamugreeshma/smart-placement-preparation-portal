@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-Analysis Result | CareerForge
+Analysis Result | Smart Placement Preparation Portal
 {% endblock %}
 
 
@@ -29,10 +29,7 @@ Analysis Result | CareerForge
 
             </div>
 
-            <a
-                href="{{ url_for('analyzer.upload_resume') }}"
-                class="btn btn-outline-primary"
-            >
+            <a href="{{ url_for('analyzer.upload_resume') }}" class="btn btn-outline-primary">
                 Analyze Another
             </a>
 
@@ -41,10 +38,7 @@ Analysis Result | CareerForge
 
         <div class="score-card">
 
-            <div
-                class="score-circle"
-                style="--score: {{ result.ats_score }}"
-            >
+            <div class="score-circle" style="--score: {{ result.ats_score }}">
 
                 <div>
 
@@ -69,24 +63,24 @@ Analysis Result | CareerForge
 
                 {% if result.ats_score >= 80 %}
 
-                    <p>
-                        Strong resume foundation. Focus on
-                        job-specific keyword tailoring.
-                    </p>
+                <p>
+                    Strong resume foundation. Focus on
+                    job-specific keyword tailoring.
+                </p>
 
                 {% elif result.ats_score >= 60 %}
 
-                    <p>
-                        Good foundation with clear opportunities
-                        for stronger impact and ATS alignment.
-                    </p>
+                <p>
+                    Good foundation with clear opportunities
+                    for stronger impact and ATS alignment.
+                </p>
 
                 {% else %}
 
-                    <p>
-                        Your resume needs stronger structure,
-                        keywords and measurable achievements.
-                    </p>
+                <p>
+                    Your resume needs stronger structure,
+                    keywords and measurable achievements.
+                </p>
 
                 {% endif %}
 
@@ -186,15 +180,15 @@ Analysis Result | CareerForge
 
                 {% for skill in result.detected_skills %}
 
-                    <span class="skill-tag found">
-                        {{ skill }}
-                    </span>
+                <span class="skill-tag found">
+                    {{ skill }}
+                </span>
 
                 {% else %}
 
-                    <p class="text-muted">
-                        No major technical keywords detected.
-                    </p>
+                <p class="text-muted">
+                    No major technical keywords detected.
+                </p>
 
                 {% endfor %}
 
@@ -215,9 +209,9 @@ Analysis Result | CareerForge
 
                     {% for section in result.detected_sections %}
 
-                        <span class="skill-tag found">
-                            {{ section }}
-                        </span>
+                    <span class="skill-tag found">
+                        {{ section }}
+                    </span>
 
                     {% endfor %}
 
@@ -236,15 +230,15 @@ Analysis Result | CareerForge
 
                     {% for section in result.missing_sections %}
 
-                        <span class="skill-tag missing">
-                            {{ section }}
-                        </span>
+                    <span class="skill-tag missing">
+                        {{ section }}
+                    </span>
 
                     {% else %}
 
-                        <p>
-                            Excellent — all major sections detected.
-                        </p>
+                    <p>
+                        Excellent — all major sections detected.
+                    </p>
 
                     {% endfor %}
 
@@ -266,17 +260,17 @@ Analysis Result | CareerForge
 
                 {% for suggestion in result.suggestions %}
 
-                    <div class="suggestion-item">
+                <div class="suggestion-item">
 
-                        <span>
-                            {{ loop.index }}
-                        </span>
+                    <span>
+                        {{ loop.index }}
+                    </span>
 
-                        <p>
-                            {{ suggestion }}
-                        </p>
+                    <p>
+                        {{ suggestion }}
+                    </p>
 
-                    </div>
+                </div>
 
                 {% endfor %}
 

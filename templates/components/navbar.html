@@ -4,13 +4,9 @@
 
         <a class="navbar-brand fw-bold text-primary" href="#">
 
-            CareerForge
+            Smart Placement Preparation Portal </a>
 
-        </a>
-
-        <button class="navbar-toggler"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbar">
+        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar">
 
             <span class="navbar-toggler-icon"></span>
 
@@ -26,15 +22,11 @@
 
                 </li>
 
-                <li class="nav-item">
 
-                    <a class="nav-link" href="#">Features</a>
-
-                </li>
 
                 <li class="nav-item">
 
-                    <a class="nav-link" href="{{ url_for('interview.index') }}">Interview Practice</a>
+                    <a class="nav-link" href="{{ url_for('interview.index') }}">Start Practice</a>
 
                 </li>
 
@@ -46,29 +38,21 @@
 
                 <li class="nav-item">
 
-                    
+
                     {% if current_user.is_authenticated %}
 
-                    <a href="{{ url_for('interview.index') }}"
-                       class="btn btn-outline-primary ms-2">
-                         Interview Practice
+                    <a href="{{ url_for('interview.index') }}" class="btn btn-outline-primary ms-2">
+                        Interview Practice
                     </a>
 
-                    <a href="{{ url_for('main.profile') }}"
-                       class="btn btn-primary ms-2">
-                         Profile
+                    <a href="{{ url_for('main.profile') }}" class="btn btn-primary ms-2">
+                        Profile
                     </a>
-                    
-                    <a href="{{ url_for('resume.builder') }}"
-                       class="btn btn-outline-primary ms-2">
-                         Resume
-                    </a> 
 
 
                     {% else %}
 
-                    <a href="{{ url_for('auth.login') }}"
-                       class="btn btn-primary ms-3">
+                    <a href="{{ url_for('auth.login') }}" class="btn btn-primary ms-3">
                         Login
                     </a>
 

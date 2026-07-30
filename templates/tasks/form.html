@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-Add Task | CareerForge
+Add Task | Smart Placement Preparation Portal
 {% endblock %}
 
 
@@ -11,10 +11,7 @@ Add Task | CareerForge
 
     <div class="mx-auto" style="max-width: 760px;">
 
-        <a
-            href="{{ url_for('tasks.index') }}"
-            class="text-decoration-none"
-        >
+        <a href="{{ url_for('tasks.index') }}" class="text-decoration-none">
             ← Back to Tasks
         </a>
 
@@ -49,13 +46,8 @@ Add Task | CareerForge
                             Task Title *
                         </label>
 
-                        <input
-                            type="text"
-                            name="title"
-                            class="form-control"
-                            required
-                            placeholder="Solve 10 graph problems"
-                        >
+                        <input type="text" name="title" class="form-control" required
+                            placeholder="Solve 10 graph problems">
 
                     </div>
 
@@ -66,12 +58,8 @@ Add Task | CareerForge
                             Description
                         </label>
 
-                        <textarea
-                            name="description"
-                            class="form-control"
-                            rows="3"
-                            placeholder="Optional notes..."
-                        ></textarea>
+                        <textarea name="description" class="form-control" rows="3"
+                            placeholder="Optional notes..."></textarea>
 
                     </div>
 
@@ -84,16 +72,13 @@ Add Task | CareerForge
                                 Category
                             </label>
 
-                            <select
-                                name="category"
-                                class="form-select"
-                            >
+                            <select name="category" class="form-select">
 
                                 {% for category in categories %}
 
-                                    <option value="{{ category }}">
-                                        {{ category }}
-                                    </option>
+                                <option value="{{ category }}">
+                                    {{ category }}
+                                </option>
 
                                 {% endfor %}
 
@@ -108,21 +93,13 @@ Add Task | CareerForge
                                 Priority
                             </label>
 
-                            <select
-                                name="priority"
-                                class="form-select"
-                            >
+                            <select name="priority" class="form-select">
 
                                 {% for priority in priorities %}
 
-                                    <option
-                                        value="{{ priority }}"
-                                        {% if priority == "Medium" %}
-                                            selected
-                                        {% endif %}
-                                    >
-                                        {{ priority }}
-                                    </option>
+                                <option value="{{ priority }}" {% if priority=="Medium" %} selected {% endif %}>
+                                    {{ priority }}
+                                </option>
 
                                 {% endfor %}
 
@@ -137,11 +114,7 @@ Add Task | CareerForge
                                 Due Date
                             </label>
 
-                            <input
-                                type="date"
-                                name="due_date"
-                                class="form-control"
-                            >
+                            <input type="date" name="due_date" class="form-control">
 
                         </div>
 
@@ -153,17 +126,11 @@ Add Task | CareerForge
                                 gap-2
                                 mt-4">
 
-                        <a
-                            href="{{ url_for('tasks.index') }}"
-                            class="btn btn-outline-secondary"
-                        >
+                        <a href="{{ url_for('tasks.index') }}" class="btn btn-outline-secondary">
                             Cancel
                         </a>
 
-                        <button
-                            type="submit"
-                            class="btn btn-primary px-4"
-                        >
+                        <button type="submit" class="btn btn-primary px-4">
                             Create Task
                         </button>
 

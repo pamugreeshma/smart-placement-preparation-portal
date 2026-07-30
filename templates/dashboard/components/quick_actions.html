@@ -6,11 +6,11 @@
 
             <div>
                 <h4 class="mb-1">
-                    ⚡ Quick Actions
+                    ⚡ Placement Journey
                 </h4>
 
                 <p class="text-muted mb-0">
-                    Continue building your career profile.
+                    Complete each step to become placement ready.
                 </p>
             </div>
 
@@ -19,10 +19,7 @@
 
         <div class="quick-actions-grid">
 
-            <a
-                href="{{ url_for('analyzer.upload_resume') }}"
-                class="quick-action-card"
-            >
+            <a href="{{ url_for('analyzer.upload_resume') }}" class="quick-action-card">
 
                 <div class="quick-action-icon">
                     <i class="bi bi-file-earmark-bar-graph"></i>
@@ -30,7 +27,7 @@
 
                 <div>
                     <strong>
-                        Analyze Resume
+                        Resume Analysis
                     </strong>
 
                     <span>
@@ -41,10 +38,7 @@
             </a>
 
 
-            <a
-                href="{{ url_for('resume.builder') }}"
-                class="quick-action-card"
-            >
+            <a href="{{ url_for('resume.builder') }}" class="quick-action-card">
 
                 <div class="quick-action-icon">
                     <i class="bi bi-file-earmark-person"></i>
@@ -63,10 +57,7 @@
             </a>
 
 
-            <a
-                href="#"
-                class="quick-action-card"
-            >
+            <a href="#" class="quick-action-card">
 
                 <div class="quick-action-icon">
                     <i class="bi bi-signpost-split"></i>
@@ -74,7 +65,7 @@
 
                 <div>
                     <strong>
-                        Career Roadmap
+                        Learning Roadmap
                     </strong>
 
                     <span>
@@ -85,10 +76,7 @@
             </a>
 
 
-            <a
-                href="{{ url_for('main.profile') }}"
-                class="quick-action-card"
-            >
+            <a href="{{ url_for('main.profile') }}" class="quick-action-card">
 
                 <div class="quick-action-icon">
                     <i class="bi bi-person-circle"></i>
@@ -111,10 +99,7 @@
     </div>
 
 </div>
-<a
-    href="{{ url_for('tasks.index') }}"
-    class="quick-action-card"
->
+<a href="{{ url_for('tasks.index') }}" class="quick-action-card">
 
     <div class="quick-action-icon">
         <i class="bi bi-check2-square"></i>
@@ -130,6 +115,32 @@
             Build streaks and earn XP
         </span>
 
+    </div>
+
+</a>
+
+<a href="{{ url_for('interview.index') }}" class="quick-action-card">
+
+    <div class="quick-action-icon">
+        <i class="bi bi-mic-fill"></i>
+    </div>
+
+    <div>
+        <strong>Interview Practice</strong>
+        <span>Prepare for technical & HR interviews</span>
+    </div>
+
+</a>
+
+<a href="{{ url_for('jobs.index') }}" class="quick-action-card">
+
+    <div class="quick-action-icon">
+        <i class="bi bi-briefcase-fill"></i>
+    </div>
+
+    <div>
+        <strong>Job Search</strong>
+        <span>Find opportunities matching your skills</span>
     </div>
 
 </a>
