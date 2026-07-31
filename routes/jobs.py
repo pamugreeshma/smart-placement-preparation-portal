@@ -11,25 +11,10 @@ def get_curated_data():
     Load and normalize curated sector and job data from the teammate project.
     """
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    possible_paths = [
-        os.path.join(base_dir, "..", "Downloads", "career zip", "project 1"),
-        os.path.join(base_dir, "..", "career zip", "project 1"),
-        r"C:\Users\pamug\Downloads\career zip\project 1",
-    ]
-
-    sectors_data = {}
-    for p in possible_paths:
-        abs_p = os.path.abspath(p)
-        if os.path.exists(abs_p):
-            if abs_p not in sys.path:
-                sys.path.insert(0, abs_p)
-            try:
-                from career_data.sectors import SECTORS
-                sectors_data = SECTORS
-                break
-            except Exception:
-                pass
-
+    
+    from career_data.sectors import SECTORS
+    sectors_data = SECTORS
+               
     sectors_list = []
     all_jobs = []
 
