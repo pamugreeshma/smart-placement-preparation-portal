@@ -24,7 +24,7 @@ def get_curated_data():
             if abs_p not in sys.path:
                 sys.path.insert(0, abs_p)
             try:
-                from app import SECTORS
+                from career_data.sectors import SECTORS
                 sectors_data = SECTORS
                 break
             except Exception:
